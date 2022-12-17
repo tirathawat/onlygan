@@ -7,8 +7,8 @@ public class EndState implements State{
     }
 
     @Override
-    public void getNextState(Gan gan) {
-
+    public State getNextState(){
+        return null;
     }
 
     @Override

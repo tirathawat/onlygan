@@ -2,6 +2,6 @@ package game.state;
 
 public interface State {
     public void render();
-    public void getNextState(Gan gan);
+    public State getNextState();
     public void getBackground();
 }

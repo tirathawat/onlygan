@@ -1,9 +1,10 @@
 package game.state;
 
 public class DialogState implements State{
-    String speaker;
-    String emotion;
-    String message;
+    private String speaker;
+    private String emotion;
+    private String message;
+    private State nextState;
 
     @Override
     public void render() {
@@ -11,14 +12,40 @@ public class DialogState implements State{
     }
 
     @Override
-    public void getNextState(Gan gan) {
-        gan.setState(new QuestionState());
-    }
+    public State getNextState(){
+        return nextState;
+    };
 
     @Override
     public void getBackground() {
 
     }
 
+    public String getEmotion() {
+        return emotion;
+    }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public String getSpeaker() {
+        return speaker;
+    }
+
+    public void setNextState(State nextState) {
+        this.nextState = nextState;
+    }
+
+    public void setEmotion(String emotion) {
+        this.emotion = emotion;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setSpeaker(String speaker) {
+        this.speaker = speaker;
+    }
 }

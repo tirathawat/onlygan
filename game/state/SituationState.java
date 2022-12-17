@@ -1,8 +1,10 @@
 package game.state;
 
 public class SituationState implements State{
-    String description;
-    String Background;
+    private String description;
+    private String Background;
+    private State nextState;
+
     SituationState(){}
 
     public String getDescription() {
@@ -19,13 +21,20 @@ public class SituationState implements State{
     }
 
     @Override
-    public void getNextState(Gan gan) {
-        gan.setState(new DialogState());
-    }
+    public State getNextState(){
+        return nextState;
+    };
 
     @Override
     public void getBackground() {
 
     }
 
+    public void setBackground(String background) {
+        Background = background;
+    }
+
+    public void setNextState(State nextState) {
+        this.nextState = nextState;
+    }
 }
