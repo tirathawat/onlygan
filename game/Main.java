@@ -1,9 +1,13 @@
 package game;
 
+import game.state.Gan;
 import game.view.HomePage;
 
 public class Main {
     public static void main(String[] args) {
-        new HomePage();
+        Gan gan = new Gan();
+        gan.getState();
+
+
     }
 }
