@@ -176,7 +176,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            DialogState dialog = new DialogState(val[2], ASSET_PATH + "/" + val[5] + ".jpg", ASSET_PATH + "/player/" + val[1] + ".png");
+            DialogState dialog = new DialogState(friends.get(Integer.parseInt(val[1])).getName() + " : " + val[2], ASSET_PATH + "/" + val[5] + ".jpg", ASSET_PATH + "/player/" + val[1] + ".png");
             sheet.push(dialog, val[3], Integer.parseInt(val[4]));
         }
         return sheet;
