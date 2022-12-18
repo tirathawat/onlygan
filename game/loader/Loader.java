@@ -36,6 +36,7 @@ public class Loader {
             friend.setIsDisplay(val[2].equals("show"));
             friends.add(friend);
         }
+        br.close();
         return friends;
     }
 
@@ -100,6 +101,7 @@ public class Loader {
             DayEndState day = new DayEndState("", Scene.generateBackgroundPath("end-day"), "");
             sheet.push(day, nextStateType, nextStateIndex);
         }
+        br.close();
         return sheet;
     }
 
@@ -113,6 +115,7 @@ public class Loader {
             EndState end = new EndState(val[1], Scene.generateBackgroundPath("final"), "");
             sheet.push(end);
         }
+        br.close();
         return sheet;
     }
 
@@ -136,6 +139,7 @@ public class Loader {
             question.setChoice(choices);
             sheet.push(question);
         }
+        br.close();
         return sheet;
     }
 
@@ -152,6 +156,7 @@ public class Loader {
             sheet.setChoice(choice);
             choices.add(sheet);
         }
+        br.close();
         return choices;
     }
 
@@ -166,6 +171,7 @@ public class Loader {
             SituationState situation = new SituationState(val[1], Scene.generateBackgroundPath(background), "");
             sheet.push(situation, val[2], Integer.parseInt(val[3]));
         }
+        br.close();
         return sheet;
     }
 
@@ -182,6 +188,7 @@ public class Loader {
             DialogState dialog = new DialogState(speaker, message, Scene.generateBackgroundPath(background), Player.generatePlayerPath(val[1]));
             sheet.push(dialog, val[3], Integer.parseInt(val[4]));
         }
+        br.close();
         return sheet;
     }
 }
