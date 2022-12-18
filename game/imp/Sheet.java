@@ -30,6 +30,15 @@ public class Sheet {
     }
 
 
+    public <T> List<T> getGenericState () {
+        List<T> states = new ArrayList<>();
+        for (SheetState state : this.states) {
+            states.add((T) state.getState());
+        }
+        return states;
+    }
+
+
     public void push (State state) {
         states.add(new SheetState(state));
     }

@@ -2,6 +2,7 @@ package game.imp;
 import game.state.*;
 import game.state.Choice;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,36 @@ import java.util.List;
 public class Import {
 
     private static final String basePath = "C:\\Users\\gan13\\Desktop\\Works\\onlygan\\game\\imp\\files";
+
+    private List<DialogState> dialogs;
+    private List<SituationState> situations;
+    private List<QuestionState> questions;
+    private List<DayEndState> days;
+    private List<EndState> ends;
+
+    public List<DialogState> getDialogs() {
+        return dialogs;
+    }
+
+    public List<SituationState> getSituations() {
+        return situations;
+    }
+
+    public List<QuestionState> getQuestions() {
+        return questions;
+    }
+
+    public List<DayEndState> getDays() {
+        return days;
+    }
+
+    public List<EndState> getEnds() {
+        return ends;
+    }
+
+    public State getFirstState () {
+        return dialogs.get(0);
+    }
 
     public void load () throws IOException {
         List<GanFriend> friends = loadFriend();
@@ -43,6 +74,12 @@ public class Import {
         questions.link(dialogs, situations, questions, days, ends);
         days.link(dialogs, situations, questions, days, ends);
         ends.link(dialogs, situations, questions, days, ends);
+
+        this.dialogs = dialogs.getGenericState();
+        this.situations = situations.getGenericState();
+        this.questions = questions.getGenericState();
+        this.days = days.getGenericState();
+        this.ends = ends.getGenericState();
     }
 
     private Sheet loadDayEnd () throws IOException {
