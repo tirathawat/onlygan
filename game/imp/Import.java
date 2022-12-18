@@ -64,6 +64,7 @@ public class Import {
             String[] val = line.split(splitBy);
             GanFriend friend = new GanFriend();
             friend.setName(val[1]);
+            friend.setIsDisplay(val[2]=="show");
             friends.add(friend);
         }
         return friends;
@@ -101,7 +102,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            DayEndState day = new DayEndState("","", "");
+            DayEndState day = new DayEndState("",ASSET_PATH + "/end-day.PNG", "");
             sheet.push(day, val[1], Integer.parseInt(val[2]));
         }
         return sheet;
@@ -115,7 +116,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            EndState end = new EndState(val[1], ASSET_PATH + "/end_" + val[0] + ".jpg", "");
+            EndState end = new EndState(val[1], ASSET_PATH + "/final.PNG", "");
             sheet.push(end);
         }
         return sheet;

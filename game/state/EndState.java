@@ -12,6 +12,25 @@ public class EndState extends State{
     public EndState(String dialogMessage, String background, String foreground) {
         super(dialogMessage, background, foreground);
     }
+
+    @Override
+    public String getDialogMessage() {
+        List<GanFriend> friends = Gan.getInstance().getFriends();
+        int maxLove = 0;
+        for (GanFriend friend : friends) {
+            if (friend.getLoveLevel() > maxLove) {
+                maxLove = friend.getLoveLevel();
+            }
+        }
+        String target = "";
+        for (GanFriend friend : friends) {
+            if (friend.getLoveLevel() == maxLove) {
+                target += String.format("%s ", friend.getName());
+            }
+        }
+        return super.getDialogMessage() + target;
+    }
+
     @Override
     public List<Choice> getChoices() {
         List<Choice> choices = new ArrayList<>();

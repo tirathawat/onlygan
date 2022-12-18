@@ -3,10 +3,17 @@ package game.state;
 public class GanFriend {
     private Integer loveLevel;
     private String name;
+
+    private boolean isDisplay;
     
     public void setLoveLevel(Integer loveLevel) {
         this.loveLevel = loveLevel;
     }
+
+    public void setIsDisplay (boolean isDisplay) {
+        this.isDisplay = isDisplay;
+    }
+
 
     public Integer getLoveLevel() {
         return loveLevel;

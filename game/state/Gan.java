@@ -36,6 +36,10 @@ public class Gan {
         return this.friends;
     }
 
+    public List<GanFriend> getFriends () {
+        return this.friends;
+    }
+
     public State getNextState() {
         return nextState;
     }
