@@ -54,6 +54,7 @@ public class HomePage extends View {
         JLabel gameTitle = new JLabel("ยินดีตอนรับสู่เกม OnlyGan!");
         gameTitle.setFont(gameFont.deriveFont(20.0f));
         gameTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        gameTitle.setPreferredSize(new Dimension(550, 50));
         return gameTitle;
     }
 
@@ -61,6 +62,7 @@ public class HomePage extends View {
         JLabel gameSubtitle = new JLabel("รักใส ๆ กับนายแกน มาเริ่มจีบแกนกันเลย");
         gameSubtitle.setFont(gameFont.deriveFont(16.0f));
         gameSubtitle.setHorizontalAlignment(SwingConstants.CENTER);
+        gameSubtitle.setPreferredSize(new Dimension(550, 30));
         return gameSubtitle;
     }
 
@@ -68,6 +70,7 @@ public class HomePage extends View {
         JButton startButton = new JButton("เริ่มเกม");
         startButton.setMargin(new Insets(0, 50, 0, 50));
         startButton.setFont(gameFont.deriveFont(16.0f));
+        startButton.setPreferredSize(new Dimension(150, 30));
         startButton.addActionListener(e -> viewModel.startGame());
         return startButton;
     }

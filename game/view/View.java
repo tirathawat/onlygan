@@ -25,7 +25,7 @@ public abstract class View extends JPanel implements Rebuildable {
 
     Font loadFont() {
         try {
-            InputStream fontStream = getClass().getResourceAsStream("/assets/fonts/MNKunghaeng.ttf");
+            InputStream fontStream = getClass().getResourceAsStream("/assets/fonts/FCParagraph-Light.ttf");
             return Font.createFont(Font.TRUETYPE_FONT, fontStream);
         } catch (Exception e) {
             e.printStackTrace();
