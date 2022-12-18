@@ -33,16 +33,18 @@ public class GameViewModel extends ViewModel {
     public List<Choice> getChoices() {
         List<Choice> choices = context.getState().getChoices();
         for (Choice choice : choices) {
-            choice.addCommand(() -> {
-                State nextState = context.getState().getNextState();
-
-                if (nextState != null) {
-                    context.setState(nextState);
-                    rebuild();
-                }
-            });
+            choice.addCommand(this::next);
         }
 
         return choices;
+    }
+
+    private void next() {
+        State nextState = context.getState().getNextState();
+
+        if (nextState != null) {
+            context.setState(nextState);
+            rebuild();
+        }
     }
 }
