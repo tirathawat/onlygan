@@ -22,12 +22,12 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
 
             SituationState situationState2 = new SituationState(null, "ผมรักแกน",
-                    "/assets/example-background.jpeg",
-                    "/assets/example-foreground.png");
+                    "assets/example-background.jpeg",
+                    "assets/example-foreground.png");
 
             SituationState situationState1 = new SituationState(situationState2, "สวัสดีครับ",
-                    "/assets/example-background.jpeg",
-                    "/assets/example-foreground.png");
+                    "assets/example-background.jpeg",
+                    "assets/example-foreground.png");
 
             Context context = new Context(situationState1);
             GameViewModel viewModel = new GameViewModel(context);
