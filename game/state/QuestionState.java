@@ -3,49 +3,19 @@ package game.state;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionState implements State{
-    private List<Choice> choice = new ArrayList<>();
-    private Choice select;
-    private State nextState;
+import game.command.Choice;
 
-    private String text;
-    @Override
-    public void render() {
-        System.out.println("question state");
+public class QuestionState extends State {
+    private List<QuestionChoice> choices;
 
+    public QuestionState(State nextState, String question, String background, String foreground,
+            List<QuestionChoice> choices) {
+        super(nextState, question, background, foreground);
+        this.choices = choices;
     }
 
     @Override
-    public State getNextState() {
-        return nextState;
-    }
-
-    @Override
-    public void getBackground() {
-
-    }
-
-    public void setText (String txt) {
-        text = txt;
-    }
-
-    public void setNextState(State nextState) {
-        this.nextState = nextState;
-    }
-
-    public void setChoice(List<Choice> choice) {
-        this.choice = choice;
-    }
-
-    public void setSelect(Choice select) {
-        this.select = select;
-    }
-
-    public Choice getSelect() {
-        return select;
-    }
-
-    public List<Choice> getChoice() {
-        return choice;
+    public List<Choice> getChoices() {
+        return new ArrayList<>();
     }
 }

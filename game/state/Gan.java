@@ -1,23 +1,13 @@
 package game.state;
 
 public class Gan {
-    private State state ;
-    private State nextState;
+    private Context context;
 
-    public State getNextState() {
-        return nextState;
+    public Gan(Context context) {
+        this.context = context;
     }
 
-    public void setNextState(State nextState) {
-        this.nextState = nextState;
+    public Context getContext() {
+        return context;
     }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
 }

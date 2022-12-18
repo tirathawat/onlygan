@@ -2,68 +2,49 @@ package game.viewmodel;
 
 import java.util.List;
 
-import game.command.Choice;
+import game.command.*;
 import game.router.Router;
+import game.state.*;
 import game.view.*;
 
 public class GameViewModel extends ViewModel {
-    private static GameViewModel instance = null;
+    private Context context;
 
-    private String background;
-    private String foreground;
-    private int currentMessageIndex;
-
-    private List<String> messages = new java.util.ArrayList<>();
-
-    private GameViewModel() {
-        currentMessageIndex = 0;
-        background = "./assets/example-background.jpeg";
-        foreground = "./assets/example-foreground.png";
-
-        messages.add("<html><body>สวัสดีครับ! ผมชื่อซับ <br> ผมแอบชอบแกนมานานแล้ว</body></html>");
-        messages.add("ผมมีอะไรจะบอกครับ");
-        messages.add("ผมอยากเอาตูดแกนครับ!!");
-    }
-
-    public static GameViewModel getInstance() {
-        if (instance == null)
-            instance = new GameViewModel();
-
-        return instance;
-    }
-
-    public String getBackground() {
-        return background;
-    }
-
-    public String getForeground() {
-        return foreground;
-    }
-
-    public String getDialogMessage() {
-        return messages.get(currentMessageIndex);
-    }
-
-    public List<Choice> getChoices() {
-        List<Choice> choices = new java.util.ArrayList<>();
-        choices.add(new Choice("ย้อนกลับ", this::previousDialog));
-        choices.add(new Choice("ต่อไป", this::nextDialog));
-        return choices;
+    public GameViewModel(Context context) {
+        this.context = context;
     }
 
     public void startGame() {
         Router.getInstance().navigateTo(new DialogPage(this));
     }
 
-    public void nextDialog() {
-        if (currentMessageIndex < messages.size() - 1)
-            currentMessageIndex++;
-        rebuild();
+    public String getBackground() {
+        return context.getState().getBackground();
     }
 
-    public void previousDialog() {
-        if (currentMessageIndex > 0)
-            currentMessageIndex--;
-        rebuild();
+    public String getForeground() {
+        return context.getState().getForeground();
+    }
+
+    public String getDialogMessage() {
+        return context.getState().getDialogMessage();
+    }
+
+    public List<Choice> getChoices() {
+        List<Choice> choices = context.getState().getChoices();
+        for (Choice choice : choices) {
+            choice.addCommand(this::next);
+        }
+
+        return choices;
+    }
+
+    private void next() {
+        State nextState = context.getState().getNextState();
+
+        if (nextState != null) {
+            context.setState(nextState);
+            rebuild();
+        }
     }
 }

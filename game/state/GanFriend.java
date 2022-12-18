@@ -1,22 +1,22 @@
 package game.state;
 
-public class GanFriend extends Gan{
-    private Integer loveLevel;
-    private String name;
-    
-    public void setLoveLevel(Integer loveLevel) {
-        this.loveLevel = loveLevel;
-    }
+// public class GanFriend extends Gan{
+// private Integer loveLevel;
+// private String name;
 
-    public Integer getLoveLevel() {
-        return loveLevel;
-    }
+// public void setLoveLevel(Integer loveLevel) {
+// this.loveLevel = loveLevel;
+// }
 
-    public String getName() {
-        return name;
-    }
+// public Integer getLoveLevel() {
+// return loveLevel;
+// }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-}
+// public String getName() {
+// return name;
+// }
+
+// public void setName(String name) {
+// this.name = name;
+// }
+// }
