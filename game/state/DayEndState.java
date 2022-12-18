@@ -21,7 +21,7 @@ public class DayEndState extends State {
         gan.loveAllFriends();
 
         for (GanFriend friend : gan.getFriends()) {
-            if (!friend.isDisplay()) {
+            if (!friend.getIsDisplay()) {
                 continue;
             }
 

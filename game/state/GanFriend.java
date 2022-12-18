@@ -9,7 +9,7 @@ public class GanFriend {
         this.loveLevel = 0;
     }
 
-    public boolean isDisplay() {
+    public boolean getIsDisplay() {
         return this.isDisplay;
     }
 
