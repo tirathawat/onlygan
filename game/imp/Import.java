@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class Import {
-    private static final String basePath = "C:\\Users\\gan13\\Desktop\\Works\\test\\onlygan\\game\\imp\\files";
+    private static final String basePath = "C:\\Users\\subta\\Desktop\\onlygan\\onlygan\\game\\imp\\files";
     private static final String ASSET_PATH = basePath + "\\assets";
 
     private List<DialogState> dialogs;
