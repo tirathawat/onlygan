@@ -1,24 +1,21 @@
 package game.state;
 
-public class DialogState implements State{
+import game.command.Choice;
+
+import java.util.List;
+
+public class DialogState extends State{
     private String speaker;
     private String emotion;
     private String message;
     private State nextState;
-
-    @Override
-    public void render() {
-        System.out.println("dialog state");
+    DialogState(State nextState, String dialogMessage, String background, String foreground) {
+        super(nextState, dialogMessage, background, foreground);
     }
 
     @Override
-    public State getNextState(){
-        return nextState;
-    };
-
-    @Override
-    public void getBackground() {
-
+    public List<Choice> getChoices() {
+        return null;
     }
 
     public String getEmotion() {

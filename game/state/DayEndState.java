@@ -1,25 +1,17 @@
 package game.state;
 
-public class DayEndState implements State{
-    private State nextState;
-    @Override
-    public void render() {
-        System.out.println("day end state");
-    }
+import game.command.Choice;
 
-    public void setNextState(State nextState) {
-        this.nextState = nextState;
+import java.util.List;
+
+public class DayEndState extends State{
+    DayEndState(State nextState, String dialogMessage, String background, String foreground) {
+        super(nextState, dialogMessage, background, foreground);
     }
 
     @Override
-    public State getNextState() {
-        return this.nextState;
-    }
-
-
-    @Override
-    public void getBackground() {
-
+    public List<Choice> getChoices() {
+        return null;
     }
 
 

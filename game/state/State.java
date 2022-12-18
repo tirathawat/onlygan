@@ -4,10 +4,10 @@ import java.util.List;
 import game.command.Choice;
 
 public abstract class State {
-    private State nextState;
-    private String dialogMessage;
-    private String background;
-    private String foreground;
+    private final State nextState;
+    private final String dialogMessage;
+    private final String background;
+    private final String foreground;
 
     State(State nextState, String dialogMessage, String background, String foreground) {
         this.nextState = nextState;

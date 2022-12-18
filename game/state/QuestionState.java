@@ -1,29 +1,32 @@
 package game.state;
 
+import game.command.Choice;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionState implements State{
-    private List<Choice> choice = new ArrayList<>();
-    private Choice select;
+public class QuestionState extends State{
+    private List<QuestionChoice> questionChoice = new ArrayList<>();
+    private QuestionChoice select;
     private State nextState;
 
     private String text;
-    @Override
-    public void render() {
-        System.out.println("question state");
 
+    QuestionState(State nextState, String dialogMessage, String background, String foreground) {
+        super(nextState, dialogMessage, background, foreground);
     }
-
+    @Override
+    public List<Choice> getChoices() {
+        List<Choice> choices = new ArrayList<>();
+        choices.add(new Choice("ถัดไป", () -> {
+        }));
+        return choices;
+    }
     @Override
     public State getNextState() {
         return nextState;
     }
 
-    @Override
-    public void getBackground() {
-
-    }
 
     public void setText (String txt) {
         text = txt;
@@ -33,19 +36,19 @@ public class QuestionState implements State{
         this.nextState = nextState;
     }
 
-    public void setChoice(List<Choice> choice) {
-        this.choice = choice;
+    public void setChoice(List<QuestionChoice> questionChoice) {
+        this.questionChoice = questionChoice;
     }
 
-    public void setSelect(Choice select) {
+    public void setSelect(QuestionChoice select) {
         this.select = select;
     }
 
-    public Choice getSelect() {
+    public QuestionChoice getSelect() {
         return select;
     }
 
-    public List<Choice> getChoice() {
-        return choice;
+    public List<QuestionChoice> getChoice() {
+        return questionChoice;
     }
 }
