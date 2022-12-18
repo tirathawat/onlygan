@@ -6,8 +6,6 @@ import game.assets.Assets;
 import game.viewmodel.GameViewModel;
 
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 public class HomePage extends View {
@@ -53,17 +51,8 @@ public class HomePage extends View {
     }
 
     private JLabel createTitle() {
-        InputStream fontStream = getClass().getResourceAsStream("/assets/fonts/MNKunghaeng.ttf");
-        Font font = null;
-        try {
-            font = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         JLabel gameTitle = new JLabel("ยินดีตอนรับสู่เกม OnlyGan!");
-        gameTitle.setFont(font.deriveFont(20f));
+        gameTitle.setFont(getFont().deriveFont(20.0f));
         gameTitle.setHorizontalAlignment(SwingConstants.CENTER);
         return gameTitle;
     }

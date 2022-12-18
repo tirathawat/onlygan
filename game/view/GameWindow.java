@@ -13,6 +13,7 @@ public class GameWindow extends JFrame implements RouterObserver {
         currentView = view;
         setTitle(TITLE);
         setExtendedState(MAXIMIZED_BOTH);
+        setFont(new java.awt.Font("TH SarabunPSK", 0, 24));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         buildView();
