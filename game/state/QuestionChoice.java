@@ -3,6 +3,17 @@ package game.state;
 public class QuestionChoice {
     private State nextState;
     private String text;
+
+    private QuestionChoiceEffect effectOnSelect;
+    private QuestionChoiceEffect effectOnNotSelect;
+
+    public void setEffectOnSelect(GanFriend friend, int heart) {
+        this.effectOnSelect = new QuestionChoiceEffect(friend, heart);
+    }
+    public void setEffectOnNotSelect(GanFriend friend, int heart) {
+        this.effectOnNotSelect = new QuestionChoiceEffect(friend, heart);
+    }
+
     public QuestionChoice(String text){
         this.text = text;
     }

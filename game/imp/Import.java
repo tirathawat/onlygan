@@ -66,7 +66,7 @@ public class Import {
         Sheet dialogs = loadDialog(friends);
         Sheet situations = loadSituation();
 
-        List<SheetStateChoice> choices = loadChoice();
+        List<SheetStateChoice> choices = loadChoice(friends);
 
         Sheet questions = loadQuestion(choices);
 
@@ -138,7 +138,7 @@ public class Import {
         return sheet;
     }
 
-    private List<SheetStateChoice> loadChoice () throws IOException {
+    private List<SheetStateChoice> loadChoice (List<GanFriend> friends) throws IOException {
         List<SheetStateChoice> choices = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(basePath + "/choice.csv"));
         String line = "";
@@ -147,6 +147,8 @@ public class Import {
         {
             String[] val = line.split(splitBy);
             QuestionChoice choice = new QuestionChoice(val[1]);
+            choice.setEffectOnSelect(friends.get(Integer.parseInt(val[4])), Integer.parseInt(val[5]));
+            choice.setEffectOnNotSelect(friends.get(Integer.parseInt(val[6])), Integer.parseInt(val[7]));
             SheetStateChoice sheet = new SheetStateChoice(val[2], Integer.parseInt(val[3]));
             sheet.setChoice(choice);
             choices.add(sheet);
