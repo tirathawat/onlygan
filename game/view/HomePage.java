@@ -67,6 +67,7 @@ public class HomePage extends View {
     private JButton createStartButton() {
         JButton startButton = new JButton("เริ่มเกม");
         startButton.setMargin(new Insets(0, 50, 0, 50));
+        startButton.setFont(gameFont.deriveFont(16.0f));
         startButton.addActionListener(e -> viewModel.startGame());
         return startButton;
     }
