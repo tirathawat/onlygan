@@ -7,6 +7,8 @@ public class QuestionState implements State{
     private List<Choice> choice = new ArrayList<>();
     private Choice select;
     private State nextState;
+
+    private String text;
     @Override
     public void render() {
         System.out.println("question state");
@@ -21,6 +23,10 @@ public class QuestionState implements State{
     @Override
     public void getBackground() {
 
+    }
+
+    public void setText (String txt) {
+        text = txt;
     }
 
     public void setNextState(State nextState) {

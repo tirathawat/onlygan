@@ -3,9 +3,7 @@ package game.state;
 public class Choice extends QuestionState{
     private String text;
     private State nextState;
-    Choice(String text,State nextState){
-        this.text = text;
-        this.nextState = nextState;
+    public Choice(){
     }
     public String getText() {
         return text;

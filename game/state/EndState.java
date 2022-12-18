@@ -6,6 +6,8 @@ public class EndState implements State{
         System.out.println("end state");
     }
 
+    private String text;
+
     @Override
     public State getNextState(){
         return null;
@@ -16,4 +18,9 @@ public class EndState implements State{
 
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setNextState (State next) {};
 }
