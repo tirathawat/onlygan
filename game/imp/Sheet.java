@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Sheet {
 
-    private String type;
+    private final String type;
 
     private List<SheetState> states = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 package game;
 
+import game.imp.Import;
 import game.state.*;
 import game.router.Router;
 import game.view.GameWindow;
@@ -12,12 +13,13 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        // Import imp = new Import();
-        // try {
-        // imp.load();
-        // } catch (IOException error) {
-        // System.err.println("File not found");
-        // }
+         Import imp = new Import();
+         try {
+            imp.load();
+         } catch (IOException error) {
+            System.err.println("File not found");
+         }
+         State firstState = imp.getFirstState();
 
         SwingUtilities.invokeLater(() -> {
 

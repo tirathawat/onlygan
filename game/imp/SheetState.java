@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SheetState {
 
-    private String type;
+    private final String type;
 
     private String nextType;
     private Integer nextIndex;
