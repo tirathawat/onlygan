@@ -65,15 +65,19 @@ public class Import {
     private void loadState (List<GanFriend> friends) throws IOException {
         Sheet dialogs = loadDialog(friends);
         Sheet situations = loadSituation();
-        Sheet questions = loadQuestion();
+
+        List<SheetStateChoice> choices = loadChoice();
+
+        Sheet questions = loadQuestion(choices);
+
         Sheet days = loadDayEnd();
         Sheet ends = loadEnding();
 
-        dialogs.link(dialogs, situations, questions, days, ends);
-        situations.link(dialogs, situations, questions, days, ends);
-        questions.link(dialogs, situations, questions, days, ends);
-        days.link(dialogs, situations, questions, days, ends);
-        ends.link(dialogs, situations, questions, days, ends);
+        dialogs.link(dialogs, situations, questions, days, ends, choices);
+        situations.link(dialogs, situations, questions, days, ends, choices);
+        questions.link(dialogs, situations, questions, days, ends, choices);
+        days.link(dialogs, situations, questions, days, ends, choices);
+        ends.link(dialogs, situations, questions, days, ends, choices);
 
         this.dialogs = dialogs.getGenericState();
         this.situations = situations.getGenericState();
@@ -111,9 +115,8 @@ public class Import {
         return sheet;
     }
 
-    private Sheet loadQuestion () throws IOException {
+    private Sheet loadQuestion (List<SheetStateChoice> allChoices) throws IOException {
         Sheet sheet = new Sheet("questions");
-        List<Choice> allChoices = loadChoice();
         BufferedReader br = new BufferedReader(new FileReader(basePath + "/question.csv"));
         String line = "";
         String splitBy = ",";
@@ -128,7 +131,7 @@ public class Import {
             String choiceStr = line.substring(start, end);
             for (String _id : choiceStr.split(",")) {
                 int id = Integer.parseInt(_id);
-                choices.add(allChoices.get(id - 1));
+                choices.add(allChoices.get(id - 1).getChoice());
             }
             question.setChoice(choices);
             sheet.push(question);
@@ -136,8 +139,8 @@ public class Import {
         return sheet;
     }
 
-    private List<Choice> loadChoice () throws IOException {
-        List<Choice> choices = new ArrayList<>();
+    private List<SheetStateChoice> loadChoice () throws IOException {
+        List<SheetStateChoice> choices = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(basePath + "/choice.csv"));
         String line = "";
         String splitBy = ",";
@@ -146,7 +149,9 @@ public class Import {
             String[] val = line.split(splitBy);
             Choice choice = new Choice();
             choice.setText(val[1]);
-            choices.add(choice);
+            SheetStateChoice sheet = new SheetStateChoice(val[2], Integer.parseInt(val[3]));
+            sheet.setChoice(choice);
+            choices.add(sheet);
         }
         return choices;
     }

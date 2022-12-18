@@ -1,6 +1,8 @@
 package game.imp;
 
+import game.state.Choice;
 import game.state.DialogState;
+import game.state.QuestionState;
 import game.state.State;
 
 import java.awt.*;
@@ -18,7 +20,7 @@ public class Sheet {
     }
 
     public void push (State state, String type, Integer index) {
-        states.add(new SheetState(state, type, index));
+        states.add(new SheetState(this.type, state, type, index));
     }
 
     public List<State> getStates () {
@@ -38,34 +40,52 @@ public class Sheet {
         return states;
     }
 
-
     public void push (State state) {
-        states.add(new SheetState(state));
+        states.add(new SheetState(this.type, state));
     }
 
-    public void link (Sheet _dialogs, Sheet _situations, Sheet _questions, Sheet _days, Sheet _ends) {
+    public void link (Sheet _dialogs, Sheet _situations, Sheet _questions, Sheet _days, Sheet _ends, List<SheetStateChoice> choices) {
         List<State> dialogs = _dialogs.getStates();
         List<State> situations = _situations.getStates();
         List<State> questions = _questions.getStates();
         List<State> days = _days.getStates();
         List<State> ends = _ends.getStates();
-        for (SheetState state : this.states) {
-            if (state.getType()==null) continue;
-            switch (state.getType()) {
+        for  (SheetStateChoice choice : choices) {
+            switch (choice.getNextType()) {
                 case "Dialogs" :
-                    state.getState().setNextState(dialogs.get(state.getIndex()));
+                    choice.getChoice().setNextState(dialogs.get(choice.getNextIndex()));
                     break;
                 case "Situation" :
-                    state.getState().setNextState(situations.get(state.getIndex()));
+                    choice.getChoice().setNextState(situations.get(choice.getNextIndex()));
                     break;
                 case "Question" :
-                    state.getState().setNextState(questions.get(state.getIndex()));
+                    choice.getChoice().setNextState(questions.get(choice.getNextIndex()));
                     break;
                 case "DayEnd" :
-                    state.getState().setNextState(days.get(state.getIndex()));
+                    choice.getChoice().setNextState(days.get(choice.getNextIndex()));
                     break;
                 case "Ending" :
-                    state.getState().setNextState(ends.get(state.getIndex()));
+                    choice.getChoice().setNextState(ends.get(choice.getNextIndex()));
+                    break;
+            }
+        }
+        for (SheetState state : this.states) {
+            if (state.getNextType()==null) continue;
+            switch (state.getNextType()) {
+                case "Dialogs" :
+                    state.getState().setNextState(dialogs.get(state.getNextIndex()));
+                    break;
+                case "Situation" :
+                    state.getState().setNextState(situations.get(state.getNextIndex()));
+                    break;
+                case "Question" :
+                    state.getState().setNextState(questions.get(state.getNextIndex()));
+                    break;
+                case "DayEnd" :
+                    state.getState().setNextState(days.get(state.getNextIndex()));
+                    break;
+                case "Ending" :
+                    state.getState().setNextState(ends.get(state.getNextIndex()));
                     break;
             }
         }

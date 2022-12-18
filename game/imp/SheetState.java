@@ -6,28 +6,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SheetState {
+
     private String type;
-    private Integer index;
+
+    private String nextType;
+    private Integer nextIndex;
 
     private State state;
-    public SheetState (State state) {
-        this.state = state;
-    }
-    public SheetState (State state, String type, Integer index) {
+    public SheetState (String type, State state) {
         this.state = state;
         this.type = type;
-        this.index = index - 1;
+    }
+    public SheetState (String type, State state, String nextType, Integer nextIndex) {
+        this.type = type;
+        this.state = state;
+        this.nextType = nextType;
+        this.nextIndex = nextIndex - 1;
+    }
+    public SheetState (String type, String nextType, Integer nextIndex) {
+        this.type = type;
+        this.nextType = nextType;
+        this.nextIndex = nextIndex - 1;
     }
 
     public State getState() {
         return state;
     }
 
-    public Integer getIndex() {
-        return index;
+    public Integer getNextIndex() {
+        return nextIndex;
     }
 
-    public String getType() {
-        return type;
+    public String getNextType() {
+        return nextType;
     }
+
+    public String getSelfType() {return type;}
 }
