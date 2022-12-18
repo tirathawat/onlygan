@@ -11,12 +11,6 @@ public class EndState extends State{
     public EndState(String dialogMessage, String background, String foreground) {
         super(dialogMessage, background, foreground);
     }
-
-    @Override
-    public State getNextState(){
-        return null;
-    }
-
     @Override
     public List<Choice> getChoices() {
         return null;
@@ -25,6 +19,4 @@ public class EndState extends State{
     public void setText(String text) {
         this.text = text;
     }
-
-    public void setNextState (State next) {};
 }

@@ -9,7 +9,6 @@ public class DialogState extends State{
     private String speaker;
     private String emotion;
     private String message;
-    private State nextState;
     public DialogState(String dialogMessage, String background, String foreground) {
         super(dialogMessage, background, foreground);
     }
@@ -32,10 +31,6 @@ public class DialogState extends State{
 
     public String getSpeaker() {
         return speaker;
-    }
-
-    public void setNextState(State nextState) {
-        this.nextState = nextState;
     }
 
     public void setEmotion(String emotion) {

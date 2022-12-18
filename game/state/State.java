@@ -20,6 +20,7 @@ public abstract class State {
     }
 
     public State getNextState() {
+        System.out.println("next state:"+nextState);
         return nextState;
     }
 

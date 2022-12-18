@@ -1,8 +1,8 @@
 package game.state;
 
 public class QuestionChoice {
-    private String text;
     private State nextState;
+    private String text;
     public QuestionChoice(String text){
         this.text = text;
     }
@@ -15,10 +15,11 @@ public class QuestionChoice {
     }
 
     public void setNextState(State nextState) {
-        this.nextState = nextState;
+        this.nextState =nextState;
     }
 
     public State getNextState() {
+
         return nextState;
     }
 }

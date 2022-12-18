@@ -8,7 +8,6 @@ import java.util.List;
 public class QuestionState extends State{
     private List<QuestionChoice> questionChoice = new ArrayList<>();
     private QuestionChoice select;
-    private State nextState;
 
     private String text;
 
@@ -18,24 +17,17 @@ public class QuestionState extends State{
     @Override
     public List<Choice> getChoices() {
         List<Choice> choices = new ArrayList<>();
-        choices.add(new Choice("ถัดไป", () -> {
-        }));
+        for(QuestionChoice choice : this.questionChoice){
+            choices.add(new Choice(choice.getText(), () -> {
+                super.setNextState(choice.getNextState());
+            }));
+        }
         return choices;
     }
-    @Override
-    public State getNextState() {
-        return nextState;
-    }
-
 
     public void setText (String txt) {
         text = txt;
     }
-
-    public void setNextState(State nextState) {
-        this.nextState = nextState;
-    }
-
     public void setChoice(List<QuestionChoice> questionChoice) {
         this.questionChoice = questionChoice;
     }
