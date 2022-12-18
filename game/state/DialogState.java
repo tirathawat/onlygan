@@ -9,8 +9,8 @@ public class DialogState extends State{
     private String emotion;
     private String message;
     private State nextState;
-    DialogState(State nextState, String dialogMessage, String background, String foreground) {
-        super(nextState, dialogMessage, background, foreground);
+    public DialogState(String dialogMessage, String background, String foreground) {
+        super(dialogMessage, background, foreground);
     }
 
     @Override

@@ -5,12 +5,9 @@ import java.util.List;
 import game.command.Choice;
 
 public class SituationState extends State {
-    public SituationState() {
-        super(null, "", "", "");
-    }
 
-    public SituationState(State nextState, String description, String background, String foreground) {
-        super(nextState, description, background, foreground);
+    public SituationState(String description, String background, String foreground) {
+        super(description, background, foreground);
     }
 
     @Override

@@ -4,16 +4,19 @@ import java.util.List;
 import game.command.Choice;
 
 public abstract class State {
-    private final State nextState;
+    private State nextState;
     private final String dialogMessage;
     private final String background;
     private final String foreground;
 
-    State(State nextState, String dialogMessage, String background, String foreground) {
-        this.nextState = nextState;
+    State(String dialogMessage, String background, String foreground) {
         this.dialogMessage = dialogMessage;
         this.background = background;
         this.foreground = foreground;
+    }
+
+    public void setNextState(State nextState) {
+        this.nextState = nextState;
     }
 
     public State getNextState() {

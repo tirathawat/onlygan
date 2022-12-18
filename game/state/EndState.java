@@ -8,8 +8,8 @@ public class EndState extends State{
 
     private String text;
 
-    EndState(State nextState, String dialogMessage, String background, String foreground) {
-        super(nextState, dialogMessage, background, foreground);
+    public EndState(String dialogMessage, String background, String foreground) {
+        super(dialogMessage, background, foreground);
     }
 
     @Override

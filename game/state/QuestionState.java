@@ -12,8 +12,8 @@ public class QuestionState extends State{
 
     private String text;
 
-    QuestionState(State nextState, String dialogMessage, String background, String foreground) {
-        super(nextState, dialogMessage, background, foreground);
+    public QuestionState(String dialogMessage, String background, String foreground) {
+        super(dialogMessage, background, foreground);
     }
     @Override
     public List<Choice> getChoices() {

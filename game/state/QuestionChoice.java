@@ -3,9 +3,8 @@ package game.state;
 public class QuestionChoice {
     private String text;
     private State nextState;
-    QuestionChoice(String text,State nextState){
+    public QuestionChoice(String text){
         this.text = text;
-        this.nextState = nextState;
     }
     public String getText() {
         return text;
