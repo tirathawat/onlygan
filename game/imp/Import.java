@@ -9,8 +9,8 @@ import java.util.List;
 
 
 public class Import {
-    private static final String basePath = "C:\\Users\\subta\\Desktop\\onlygan\\onlygan\\game\\imp\\files";
-    private static final String ASSET_PATH = "C:\\Users\\subta\\Desktop\\onlygan\\onlygan\\game\\imp\\files\\assets";
+    private static final String basePath = "C:\\Users\\gan13\\Desktop\\Works\\test\\onlygan\\game\\imp\\files";
+    private static final String ASSET_PATH = basePath + "\\assets";
 
     private List<DialogState> dialogs;
     private List<SituationState> situations;
@@ -64,7 +64,7 @@ public class Import {
             String[] val = line.split(splitBy);
             GanFriend friend = new GanFriend();
             friend.setName(val[1]);
-            friend.setIsDisplay(val[2]=="show");
+            friend.setIsDisplay(val[2].equals("show"));
             friends.add(friend);
         }
         return friends;
