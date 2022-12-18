@@ -14,6 +14,10 @@ public class GanFriend {
         this.isDisplay = isDisplay;
     }
 
+    public boolean getIsDisplay () {
+        return this.isDisplay;
+    }
+
 
     public Integer getLoveLevel() {
         return loveLevel;

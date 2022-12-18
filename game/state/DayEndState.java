@@ -15,6 +15,7 @@ public class DayEndState extends State{
         List<GanFriend> friends = Gan.getInstance().getEndDayFriends();
         String result = "";
         for (GanFriend friend : friends) {
+            if (!friend.getIsDisplay()) continue;
             result += String.format("%s : %d หัวใจ        ", friend.getName(), friend.getLoveLevel());
         }
         return result;
