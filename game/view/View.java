@@ -1,9 +1,10 @@
 package game.view;
 
 import javax.swing.*;
-import game.viewmodel.*;
 import java.awt.Font;
 import java.io.InputStream;
+import game.viewmodel.*;
+import game.assets.Assets;
 
 public abstract class View extends JPanel implements Rebuildable {
     protected Font gameFont;
@@ -25,7 +26,7 @@ public abstract class View extends JPanel implements Rebuildable {
 
     Font loadFont() {
         try {
-            InputStream fontStream = getClass().getResourceAsStream("/assets/fonts/FCParagraph-Light.ttf");
+            InputStream fontStream = getClass().getResourceAsStream(Assets.GAME_FONT);
             return Font.createFont(Font.TRUETYPE_FONT, fontStream);
         } catch (Exception e) {
             e.printStackTrace();

@@ -5,13 +5,27 @@ public class Choice {
     private boolean isEnding;
     private Commandable command;
 
+    public Choice(String text) {
+        this.text = text;
+        this.command = () -> {
+        };
+        this.isEnding = false;
+    }
+
     public Choice(String text, Commandable command) {
         this.text = text;
         this.command = command;
         this.isEnding = false;
     }
 
-    public Choice(String text, Commandable command,boolean isEnding) {
+    public Choice(String text, boolean isEnding) {
+        this.text = text;
+        this.command = () -> {
+        };
+        this.isEnding = isEnding;
+    }
+
+    public Choice(String text, Commandable command, boolean isEnding) {
         this.text = text;
         this.command = command;
         this.isEnding = isEnding;

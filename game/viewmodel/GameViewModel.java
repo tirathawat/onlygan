@@ -53,6 +53,5 @@ public class GameViewModel extends ViewModel {
 
     private void end() {
         Router.getInstance().navigateTo(new HomePage(this));
-
     }
 }

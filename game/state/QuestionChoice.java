@@ -3,34 +3,18 @@ package game.state;
 public class QuestionChoice {
     private State nextState;
     private String text;
+    private GanFriend effectedFriend;
+    private int effectedHeart;
 
-    private GanFriend effectFriendOnSelect;
-    private int effectHeartOnSelect;
-
-    private GanFriend effectFriendOnNotSelect;
-    private int effectHeartOnNotSelect;
-
-    public void setEffectOnSelect(GanFriend friend, int heart) {
-        this.effectFriendOnSelect = friend;
-        this.effectHeartOnSelect = heart;
-    }
-    public void setEffectOnNotSelect(GanFriend friend, int heart) {
-        this.effectFriendOnNotSelect = friend;
-        this.effectHeartOnNotSelect = heart;
-    }
-
-    public void onSelect () {
-        this.effectFriendOnSelect.addLoveLevel(this.effectHeartOnSelect);
-    }
-
-    public void onNotSelect () {
-        this.effectFriendOnNotSelect.addLoveLevel(this.effectHeartOnNotSelect);
-    }
-
-
-    public QuestionChoice(String text){
+    public QuestionChoice(String text) {
         this.text = text;
     }
+
+    public void setEffectOnSelect(GanFriend friend, int heart) {
+        this.effectedFriend = friend;
+        this.effectedHeart = heart;
+    }
+
     public String getText() {
         return text;
     }
@@ -39,12 +23,15 @@ public class QuestionChoice {
         this.text = text;
     }
 
-    public void setNextState(State nextState) {
-        this.nextState =nextState;
+    public State getNextState() {
+        return nextState;
     }
 
-    public State getNextState() {
+    public void setNextState(State nextState) {
+        this.nextState = nextState;
+    }
 
-        return nextState;
+    public void onSelect() {
+        this.effectedFriend.addLoveLevel(this.effectedHeart);
     }
 }
