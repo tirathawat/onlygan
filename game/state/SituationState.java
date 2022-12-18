@@ -1,40 +1,23 @@
 package game.state;
 
-public class SituationState implements State{
-    private String description;
-    private String Background;
-    private State nextState;
+import java.util.ArrayList;
+import java.util.List;
+import game.command.Choice;
 
-    public SituationState(){}
-
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
+public class SituationState extends State {
+    public SituationState() {
+        super(null, "", "", "");
     }
 
-    @Override
-    public void render() {
-        // Jframe
-        System.out.println("situation");
+    public SituationState(State nextState, String description, String background, String foreground) {
+        super(nextState, description, background, foreground);
     }
 
     @Override
-    public State getNextState(){
-        return nextState;
-    };
-
-    @Override
-    public void getBackground() {
-
-    }
-
-    public void setBackground(String background) {
-        Background = background;
-    }
-
-    public void setNextState(State nextState) {
-        this.nextState = nextState;
+    public List<Choice> getChoices() {
+        List<Choice> choices = new ArrayList<>();
+        choices.add(new Choice("ถัดไป", () -> {
+        }));
+        return choices;
     }
 }
