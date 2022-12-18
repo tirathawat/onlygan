@@ -5,7 +5,7 @@ public class SituationState implements State{
     private String Background;
     private State nextState;
 
-    SituationState(){}
+    public SituationState(){}
 
     public String getDescription() {
         return description;

@@ -1,7 +1,7 @@
 package game.state;
 
 public class GanFriend extends Gan{
-    private Integer loveLevel ;
+    private Integer loveLevel;
     private String name;
     
     public void setLoveLevel(Integer loveLevel) {
