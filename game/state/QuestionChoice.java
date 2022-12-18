@@ -4,15 +4,29 @@ public class QuestionChoice {
     private State nextState;
     private String text;
 
-    private QuestionChoiceEffect effectOnSelect;
-    private QuestionChoiceEffect effectOnNotSelect;
+    private GanFriend effectFriendOnSelect;
+    private int effectHeartOnSelect;
+
+    private GanFriend effectFriendOnNotSelect;
+    private int effectHeartOnNotSelect;
 
     public void setEffectOnSelect(GanFriend friend, int heart) {
-        this.effectOnSelect = new QuestionChoiceEffect(friend, heart);
+        this.effectFriendOnSelect = friend;
+        this.effectHeartOnSelect = heart;
     }
     public void setEffectOnNotSelect(GanFriend friend, int heart) {
-        this.effectOnNotSelect = new QuestionChoiceEffect(friend, heart);
+        this.effectFriendOnNotSelect = friend;
+        this.effectHeartOnNotSelect = heart;
     }
+
+    public void onSelect () {
+        this.effectFriendOnSelect.addLoveLevel(this.effectHeartOnSelect);
+    }
+
+    public void onNotSelect () {
+        this.effectFriendOnNotSelect.addLoveLevel(this.effectHeartOnNotSelect);
+    }
+
 
     public QuestionChoice(String text){
         this.text = text;

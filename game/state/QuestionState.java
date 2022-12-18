@@ -19,6 +19,7 @@ public class QuestionState extends State{
         List<Choice> choices = new ArrayList<>();
         for(QuestionChoice choice : this.questionChoice){
             choices.add(new Choice(choice.getText(), () -> {
+                choice.onSelect();
                 super.setNextState(choice.getNextState());
             }));
         }

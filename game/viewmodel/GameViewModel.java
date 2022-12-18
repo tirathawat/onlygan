@@ -45,7 +45,6 @@ public class GameViewModel extends ViewModel {
 
     private void next() {
         State nextState = context.getState().getNextState();
-
         if (nextState != null) {
             context.setState(nextState);
             rebuild();

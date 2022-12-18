@@ -42,6 +42,12 @@ public class Import {
         return this.dialogs.get(0);
     }
 
+    private List<GanFriend> friends;
+
+    public List<GanFriend> getFriends() {
+        return friends;
+    }
+
     public void load () throws IOException {
         List<GanFriend> friends = loadFriend();
         loadState(friends);
@@ -49,6 +55,7 @@ public class Import {
 
     private List<GanFriend> loadFriend () throws IOException {
         List<GanFriend> friends = new ArrayList<>();
+        Gan.getInstance().setFriends(friends);
         BufferedReader br = new BufferedReader(new FileReader(basePath + "/friend.csv"));
         String line = "";
         String splitBy = ",";
