@@ -13,6 +13,18 @@ public class Choice {
         return text;
     }
 
+    public Commandable getCommand() {
+        return command;
+    }
+
+    public void addCommand(Commandable command) {
+        Commandable oldCommand = this.command;
+        this.command = () -> {
+            oldCommand.execute();
+            command.execute();
+        };
+    }
+
     public void onSelectedChoice() {
         command.execute();
     }
