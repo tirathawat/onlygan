@@ -39,7 +39,7 @@ public class Import {
     }
 
     public State getFirstState () {
-        return dialogs.get(0);
+        return this.dialogs.get(0);
     }
 
     public void load () throws IOException {
