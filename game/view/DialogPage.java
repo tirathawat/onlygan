@@ -31,7 +31,7 @@ public class DialogPage extends View {
     private JLabel createDialogMessage() {
         JLabel text = new JLabel("");
         text.setText(viewModel.getDialogMessage());
-        text.setFont(text.getFont().deriveFont(20.0f));
+        text.setFont(gameFont.deriveFont(20.0f));
         text.setPreferredSize(new Dimension(50, 150));
         text.setBorder(new EmptyBorder(20, 20, 20, 20));
         return text;
@@ -41,7 +41,7 @@ public class DialogPage extends View {
         List<JButton> choiceButtons = new ArrayList<>();
         for (Choice choice : viewModel.getChoices()) {
             JButton choiceButton = new JButton(choice.getText());
-            choiceButton.setFont(choiceButton.getFont().deriveFont(16.0f));
+            choiceButton.setFont(gameFont.deriveFont(16.0f));
             choiceButton.setMargin(new Insets(10, 0, 10, 0));
             choiceButton.addActionListener(e -> choice.onSelectedChoice());
             choiceButtons.add(choiceButton);
