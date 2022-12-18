@@ -1,6 +1,6 @@
 package game.state;
 
-public class GanFriend extends Gan{
+public class GanFriend {
     private Integer loveLevel;
     private String name;
     

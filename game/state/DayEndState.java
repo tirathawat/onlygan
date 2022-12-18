@@ -12,7 +12,7 @@ public class DayEndState extends State{
 
     @Override
     public String getDialogMessage() {
-        List<GanFriend> friends = Gan.getInstance().getFriends();
+        List<GanFriend> friends = Gan.getInstance().getEndDayFriends();
         String result = "";
         for (GanFriend friend : friends) {
             result += String.format("%d : %d         ", friend.getName(), friend.getLoveLevel());
