@@ -15,6 +15,7 @@ public class GameViewModel extends ViewModel {
     }
 
     public void startGame() {
+        this.context.reset();
         Router.getInstance().navigateTo(new DialogPage(this));
     }
 
@@ -33,9 +34,12 @@ public class GameViewModel extends ViewModel {
     public List<Choice> getChoices() {
         List<Choice> choices = context.getState().getChoices();
         for (Choice choice : choices) {
+            if (choice.isEnding()) {
+                choice.addCommand(this::end);
+                continue;
+            }
             choice.addCommand(this::next);
         }
-
         return choices;
     }
 
@@ -46,5 +50,10 @@ public class GameViewModel extends ViewModel {
             context.setState(nextState);
             rebuild();
         }
+    }
+
+    private void end() {
+        Router.getInstance().navigateTo(new HomePage(this));
+
     }
 }

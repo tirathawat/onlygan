@@ -2,6 +2,7 @@ package game.state;
 
 import game.command.Choice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EndState extends State{
@@ -13,7 +14,10 @@ public class EndState extends State{
     }
     @Override
     public List<Choice> getChoices() {
-        return null;
+        List<Choice> choices = new ArrayList<>();
+        choices.add(new Choice("จบ", () -> {
+        },true));
+        return choices;
     }
 
     public void setText(String text) {
