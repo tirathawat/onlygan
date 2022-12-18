@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DialogState extends State {
-    public DialogState(String dialogMessage, String background, String foreground) {
-        super(dialogMessage, background, foreground);
+    public DialogState(GanFriend speaker, String dialogMessage, String background, String foreground) {
+        super(speaker.getName() + " : " + dialogMessage, background, foreground);
     }
 
     @Override

@@ -1,53 +1,21 @@
-package game.imp;
+package game.loader;
 
-import game.assets.Assets;
 import game.assets.Contents;
+import game.assets.Player;
+import game.assets.Scene;
 import game.state.*;
 import game.state.QuestionChoice;
 
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Loader {
-    private static final String basePath = "C:\\Users\\subta\\Desktop\\onlygan\\onlygan\\game\\imp\\files";
-    private static final String ASSET_PATH = basePath + "\\assets";
 
-    private List<DialogState> dialogs;
-    private List<SituationState> situations;
-    private List<QuestionState> questions;
-    private List<DayEndState> days;
-    private List<EndState> ends;
-
-    public List<DialogState> getDialogs() {
-        return dialogs;
-    }
-
-    public List<SituationState> getSituations() {
-        return situations;
-    }
-
-    public List<QuestionState> getQuestions() {
-        return questions;
-    }
-
-    public List<DayEndState> getDays() {
-        return days;
-    }
-
-    public List<EndState> getEnds() {
-        return ends;
-    }
+    private State firstState;
 
     public State getFirstState() {
-        return this.dialogs.get(0);
-    }
-
-    private List<GanFriend> friends;
-
-    public List<GanFriend> getFriends() {
-        return friends;
+        return this.firstState;
     }
 
     public void load() throws IOException {
@@ -58,7 +26,7 @@ public class Loader {
     private List<GanFriend> loadFriend() throws IOException {
         List<GanFriend> friends = new ArrayList<>();
         Gan.getInstance().setFriends(friends);
-        BufferedReader br = new BufferedReader(new FileReader(basePath + "/friend.csv"));
+        BufferedReader br = new BufferedReader(new FileReader(Contents.FRIENDS));
         String line = "";
         String splitBy = ",";
         while ((line = br.readLine()) != null) {
@@ -82,55 +50,81 @@ public class Loader {
         Sheet days = loadDayEnd();
         Sheet ends = loadEnding();
 
-        dialogs.link(dialogs, situations, questions, days, ends, choices);
-        situations.link(dialogs, situations, questions, days, ends, choices);
-        questions.link(dialogs, situations, questions, days, ends, choices);
-        days.link(dialogs, situations, questions, days, ends, choices);
-        ends.link(dialogs, situations, questions, days, ends, choices);
+        dialogs.link(dialogs, situations, questions, days, ends);
+        situations.link(dialogs, situations, questions, days, ends);
+        questions.link(dialogs, situations, questions, days, ends);
+        days.link(dialogs, situations, questions, days, ends);
+        ends.link(dialogs, situations, questions, days, ends);
 
-        this.dialogs = dialogs.getGenericState();
-        this.situations = situations.getGenericState();
-        this.questions = questions.getGenericState();
-        this.days = days.getGenericState();
-        this.ends = ends.getGenericState();
+        linkChoice(choices, dialogs, situations, questions, days, ends);
+
+        this.firstState = dialogs.getStates().get(0);
+    }
+
+    private void linkChoice (List<SheetStateChoice> choices, Sheet _dialogs, Sheet _situations, Sheet _questions, Sheet _days, Sheet _ends) {
+        List<State> dialogs = _dialogs.getStates();
+        List<State> situations = _situations.getStates();
+        List<State> questions = _questions.getStates();
+        List<State> days = _days.getStates();
+        List<State> ends = _ends.getStates();
+        for  (SheetStateChoice choice : choices) {
+            switch (choice.getNextType()) {
+                case "Dialogs" :
+                    choice.getChoice().setNextState(dialogs.get(choice.getNextIndex()));
+                    break;
+                case "Situation" :
+                    choice.getChoice().setNextState(situations.get(choice.getNextIndex()));
+                    break;
+                case "Question" :
+                    choice.getChoice().setNextState(questions.get(choice.getNextIndex()));
+                    break;
+                case "DayEnd" :
+                    choice.getChoice().setNextState(days.get(choice.getNextIndex()));
+                    break;
+                case "Ending" :
+                    choice.getChoice().setNextState(ends.get(choice.getNextIndex()));
+                    break;
+            }
+        }
     }
 
     private Sheet loadDayEnd() throws IOException {
-        Sheet sheet = new Sheet("days");
-        BufferedReader br = new BufferedReader(new FileReader(basePath + "/day-end.csv"));
+        Sheet sheet = new Sheet();
+        BufferedReader br = new BufferedReader(new FileReader(Contents.DAY_END));
         String line = "";
         String splitBy = ",";
         while ((line = br.readLine()) != null) {
             String[] val = line.split(splitBy);
-            DayEndState day = new DayEndState("", ASSET_PATH + "/end-day.PNG", "");
-            sheet.push(day, val[1], Integer.parseInt(val[2]));
+            String nextStateType = val[1];
+            Integer nextStateIndex = Integer.parseInt(val[2]);
+            DayEndState day = new DayEndState("", Scene.generateBackgroundPath("end-day"), "");
+            sheet.push(day, nextStateType, nextStateIndex);
         }
         return sheet;
     }
 
     private Sheet loadEnding() throws IOException {
-        Sheet sheet = new Sheet("ends");
-        BufferedReader br = new BufferedReader(new FileReader(basePath + "/ending.csv"));
+        Sheet sheet = new Sheet();
+        BufferedReader br = new BufferedReader(new FileReader(Contents.ENDING));
         String line = "";
         String splitBy = ",";
         while ((line = br.readLine()) != null) {
             String[] val = line.split(splitBy);
-            EndState end = new EndState(val[1], ASSET_PATH + "/final.PNG", "");
+            EndState end = new EndState(val[1], Scene.generateBackgroundPath("final"), "");
             sheet.push(end);
         }
         return sheet;
     }
 
     private Sheet loadQuestion(List<SheetStateChoice> allChoices) throws IOException {
-        Sheet sheet = new Sheet("questions");
-        BufferedReader br = new BufferedReader(new FileReader(basePath + "/question.csv"));
+        Sheet sheet = new Sheet();
+        BufferedReader br = new BufferedReader(new FileReader(Contents.QUESTIONS));
         String line = "";
         String splitBy = ",";
         while ((line = br.readLine()) != null) {
             String[] val = line.split(splitBy);
-            QuestionState question = new QuestionState(val[1], ASSET_PATH + "/" + val[6] + ".jpg",
-                    ASSET_PATH + "/player/0.png");
-            question.setText(val[1]);
+            String background = val[6];
+            QuestionState question = new QuestionState(val[1], Scene.generateBackgroundPath(background), Player.generatePlayerPath("0"));
             List<QuestionChoice> choices = new ArrayList<>();
             int start = line.indexOf("\"") + 1;
             int end = line.indexOf("\"", start);
@@ -147,7 +141,7 @@ public class Loader {
 
     private List<SheetStateChoice> loadChoice(List<GanFriend> friends) throws IOException {
         List<SheetStateChoice> choices = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(basePath + "/choice.csv"));
+        BufferedReader br = new BufferedReader(new FileReader(Contents.CHOICES));
         String line = "";
         String splitBy = ",";
         while ((line = br.readLine()) != null) {
@@ -162,27 +156,30 @@ public class Loader {
     }
 
     private Sheet loadSituation() throws IOException {
-        Sheet sheet = new Sheet("situations");
-        BufferedReader br = new BufferedReader(new FileReader(basePath + "/situation.csv"));
+        Sheet sheet = new Sheet();
+        BufferedReader br = new BufferedReader(new FileReader(Contents.SITUATIONS));
         String line = "";
         String splitBy = ",";
         while ((line = br.readLine()) != null) {
             String[] val = line.split(splitBy);
-            SituationState situation = new SituationState(val[1], ASSET_PATH + "/" + val[4] + ".jpg", "");
+            String background = val[4];
+            SituationState situation = new SituationState(val[1], Scene.generateBackgroundPath(background), "");
             sheet.push(situation, val[2], Integer.parseInt(val[3]));
         }
         return sheet;
     }
 
     private Sheet loadDialog(List<GanFriend> friends) throws IOException {
-        Sheet sheet = new Sheet("dialogs");
-        BufferedReader br = new BufferedReader(new FileReader(basePath + "/dialogs.csv"));
+        Sheet sheet = new Sheet();
+        BufferedReader br = new BufferedReader(new FileReader(Contents.DIALOGS));
         String line = "";
         String splitBy = ",";
         while ((line = br.readLine()) != null) {
             String[] val = line.split(splitBy);
-            DialogState dialog = new DialogState(friends.get(Integer.parseInt(val[1])).getName() + " : " + val[2],
-                    ASSET_PATH + "/" + val[5] + ".jpg", ASSET_PATH + "/player/" + val[1] + ".png");
+            GanFriend speaker = friends.get(Integer.parseInt(val[1]));
+            String message = val[2];
+            String background = val[5];
+            DialogState dialog = new DialogState(speaker, message, Scene.generateBackgroundPath(background), Player.generatePlayerPath(val[1]));
             sheet.push(dialog, val[3], Integer.parseInt(val[4]));
         }
         return sheet;

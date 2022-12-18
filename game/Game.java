@@ -1,6 +1,6 @@
 package game;
 
-import game.imp.Loader;
+import game.loader.Loader;
 import game.state.*;
 import game.router.Router;
 import game.view.GameWindow;

@@ -1,29 +1,21 @@
-package game.imp;
+package game.loader;
 import game.state.State;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SheetState {
-
-    private final String type;
 
     private String nextType;
     private Integer nextIndex;
 
     private State state;
-    public SheetState (String type, State state) {
+    public SheetState (State state) {
         this.state = state;
-        this.type = type;
     }
-    public SheetState (String type, State state, String nextType, Integer nextIndex) {
-        this.type = type;
+    public SheetState (State state, String nextType, Integer nextIndex) {
         this.state = state;
         this.nextType = nextType;
         this.nextIndex = nextIndex - 1;
     }
-    public SheetState (String type, String nextType, Integer nextIndex) {
-        this.type = type;
+    public SheetState (String nextType, Integer nextIndex) {
         this.nextType = nextType;
         this.nextIndex = nextIndex - 1;
     }
@@ -40,5 +32,4 @@ public class SheetState {
         return nextType;
     }
 
-    public String getSelfType() {return type;}
 }
