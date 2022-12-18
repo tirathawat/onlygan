@@ -122,7 +122,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            QuestionState question = new QuestionState(val[1], ASSET_PATH + "/" + val[6] + ".jpg", ASSET_PATH + "/player/0.jpg");
+            QuestionState question = new QuestionState(val[1], ASSET_PATH + "/" + val[6] + ".jpg", ASSET_PATH + "/player/0.png");
             question.setText(val[1]);
             List<QuestionChoice> choices = new ArrayList<>();
             int start = line.indexOf("\"") + 1;
@@ -176,7 +176,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            DialogState dialog = new DialogState(val[2], ASSET_PATH + "/" + val[5] + ".jpg", ASSET_PATH + "/player/" + val[1] + ".jpg");
+            DialogState dialog = new DialogState(val[2], ASSET_PATH + "/" + val[5] + ".jpg", ASSET_PATH + "/player/" + val[1] + ".png");
             sheet.push(dialog, val[3], Integer.parseInt(val[4]));
         }
         return sheet;
