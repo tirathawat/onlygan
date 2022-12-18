@@ -9,7 +9,8 @@ import java.util.List;
 
 
 public class Import {
-    private static final String basePath = "C:\\Users\\gan13\\Desktop\\Works\\test\\onlygan\\game\\imp\\files";
+    private static final String basePath = "C:\\Users\\subta\\Desktop\\onlygan\\onlygan\\game\\imp\\files";
+    private static final String ASSET_PATH = "C:\\Users\\subta\\Desktop\\onlygan\\onlygan\\game\\imp\\files\\assets";
 
     private List<DialogState> dialogs;
     private List<SituationState> situations;
@@ -107,7 +108,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            EndState end = new EndState(val[1], "", "");
+            EndState end = new EndState(val[1], ASSET_PATH + "/end_" + val[0] + ".jpg", "");
             sheet.push(end);
         }
         return sheet;
@@ -121,7 +122,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            QuestionState question = new QuestionState(val[1], "", "");
+            QuestionState question = new QuestionState(val[1], ASSET_PATH + "/" + val[6] + ".jpg", "");
             question.setText(val[1]);
             List<QuestionChoice> choices = new ArrayList<>();
             int start = line.indexOf("\"") + 1;
@@ -161,7 +162,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            SituationState situation = new SituationState(val[1], "", "");
+            SituationState situation = new SituationState(val[1], ASSET_PATH + "/" + val[4] + ".jpg", "");
             sheet.push(situation, val[2], Integer.parseInt(val[3]));
         }
         return sheet;
@@ -175,7 +176,7 @@ public class Import {
         while ((line = br.readLine()) != null)
         {
             String[] val = line.split(splitBy);
-            DialogState dialog = new DialogState(val[2], "", "");
+            DialogState dialog = new DialogState(val[2], ASSET_PATH + "/" + val[5] + ".jpg", "");
             sheet.push(dialog, val[3], Integer.parseInt(val[4]));
         }
         return sheet;
