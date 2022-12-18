@@ -2,6 +2,7 @@ package game.state;
 
 import game.command.Choice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DialogState extends State{
@@ -15,7 +16,10 @@ public class DialogState extends State{
 
     @Override
     public List<Choice> getChoices() {
-        return null;
+        List<Choice> choices = new ArrayList<>();
+        choices.add(new Choice("ถัดไป", () -> {
+        }));
+        return choices;
     }
 
     public String getEmotion() {

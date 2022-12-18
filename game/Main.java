@@ -22,18 +22,7 @@ public class Main {
          State firstState = imp.getFirstState();
 
         SwingUtilities.invokeLater(() -> {
-
-            SituationState situationState2 = new SituationState("ผมรักแกน",
-                    "/assets/example-background.jpeg",
-                    "/assets/example-foreground.png");
-
-            SituationState situationState1 = new SituationState("สวัสดีครับ",
-                    "/assets/example-background.jpeg",
-                    "/assets/example-foreground.png");
-
-            situationState1.setNextState(situationState2);
-
-            Context context = new Context(situationState1);
+            Context context = new Context(firstState);
             GameViewModel viewModel = new GameViewModel(context);
             HomePage homePage = new HomePage(viewModel);
             GameWindow window = new GameWindow(homePage);
