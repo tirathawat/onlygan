@@ -37,4 +37,5 @@ public abstract class State {
     }
 
     public abstract List<Choice> getChoices();
+
 }

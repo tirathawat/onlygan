@@ -19,4 +19,8 @@ public class GanFriend extends Gan{
     public void setName(String name) {
         this.name = name;
     }
+
+    public void addLoveLevel (Integer level) {
+        this.loveLevel += level;
+    }
 }
