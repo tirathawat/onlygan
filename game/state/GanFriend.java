@@ -4,8 +4,8 @@ public class GanFriend {
     private Integer loveLevel;
     private String name;
     
-    public void setLoveLevel(Integer loveLevel) {
-        this.loveLevel = loveLevel;
+    public GanFriend(){
+        loveLevel=0;
     }
 
     public Integer getLoveLevel() {
