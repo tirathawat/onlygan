@@ -52,6 +52,7 @@ public class Gan {
 
     public void loveAllFriends() {
         for (GanFriend friend : this.friends) {
+            if (!friend.getIsCharacter()) continue;
             friend.addLoveLevel(1);
         }
     }

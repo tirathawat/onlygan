@@ -34,6 +34,7 @@ public class Loader {
             GanFriend friend = new GanFriend();
             friend.setName(val[1]);
             friend.setIsDisplay(val[2].equals("show"));
+            friend.setIsCharacter(val[3].equals("character"));
             friends.add(friend);
         }
         br.close();

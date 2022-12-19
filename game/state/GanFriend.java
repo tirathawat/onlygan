@@ -5,6 +5,8 @@ public class GanFriend {
     private String name;
     private boolean isDisplay;
 
+    private boolean isCharacter;
+
     public GanFriend() {
         this.loveLevel = 0;
     }
@@ -15,6 +17,13 @@ public class GanFriend {
 
     public void setIsDisplay(boolean isDisplay) {
         this.isDisplay = isDisplay;
+    }
+    public boolean getIsCharacter() {
+        return this.isCharacter;
+    }
+
+    public void setIsCharacter(boolean isCharacter) {
+        this.isCharacter = isCharacter;
     }
 
     public Integer getLoveLevel() {

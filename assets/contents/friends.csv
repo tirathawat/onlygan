@@ -1,7 +1,7 @@
-0,Player,show
-1,Gan,hide
-2,แนน,show
-3,ขวัญ,show
-4,น้ำ,show
-5,พลอย,show
-6,ทรัพย์,hide
+0,Player,show,character
+1,Gan,hide,player
+2,แนน,show,character
+3,ขวัญ,show,character
+4,น้ำ,show,character
+5,พลอย,show,character
+6,ทรัพย์,hide,character
